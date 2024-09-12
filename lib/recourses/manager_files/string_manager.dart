@@ -32,12 +32,21 @@ class UiStrings{
    String kError = 'something went wrong';
 
 
+   String kLogo    = 'Logo';
+   String kProfile = 'Profile';
+   String kPhone   = 'Phone';
+   String kLevel    = 'level';
+   String kExperience = 'Years of experience';
+   String kLocation = 'Location';
+
+
 
 }
 class LogicStrings{
 
    String kRegisterEndPoint = '/auth/register';
    String kLoginEndPoint = '/auth/login';
+   String kProfileEndPoint = '/auth/profile';
 
    String kPhoneNumber = 'phone';
    String kPassword = 'password';
