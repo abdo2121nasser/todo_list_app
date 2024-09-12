@@ -8,7 +8,7 @@ import 'font_manager.dart';
 ThemeData getAppTheme() {
   return ThemeData(
       appBarTheme: const AppBarTheme(
-        //backgroundColor: ColorManager.kBlackColor,
+        backgroundColor: kWhiteColor,
         elevation: 0,
 
         //actionsIconTheme: IconThemeData(color: ColorManager.kPurpleColor)
@@ -22,13 +22,17 @@ ThemeData getAppTheme() {
             fontSize: FontSize.s14,
             color: kHintColor,
           ),
+          fillColor: kWhiteColor,
+          filled: true,
           // labelStyle:
           //     getRegularStyle(fontSize: FontSize.s14, color: kHintColor),
           enabledBorder: OutlineInputBorder(
+              borderSide:  BorderSide(color:kHintColor,width: AppHorizontalSize.s1_5),
+
               borderRadius:
                   BorderRadius.all(Radius.circular(AppRadiusSize.s10))),
           focusedBorder: OutlineInputBorder(
-              //     borderSide: const BorderSide(color: ColorManager.kPurpleColor),
+                  borderSide:  BorderSide(color:kHintColor,width: AppHorizontalSize.s1_5),
               borderRadius:
                   BorderRadius.all(Radius.circular(AppRadiusSize.s10)))),
       // buttonTheme: ButtonThemeData(

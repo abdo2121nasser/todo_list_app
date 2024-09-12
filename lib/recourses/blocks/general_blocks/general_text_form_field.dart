@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../manager_files/color_manager.dart';
 import '../../manager_files/values_manager.dart';
-
 
 class GeneralTextFormField extends StatelessWidget {
   final bool onlyInteger;
@@ -17,7 +17,7 @@ class GeneralTextFormField extends StatelessWidget {
   final Icon? prefixIcon;
   final VoidCallback? suffixIconFunction;
   final VoidCallback? prefixIconFunction;
- final bool isVisible;
+  final bool isVisible;
 
   const GeneralTextFormField({
     super.key,
@@ -27,7 +27,7 @@ class GeneralTextFormField extends StatelessWidget {
     this.multiLine = false,
     this.isArabic = false,
     this.readOnly = false,
-    this.isVisible=true,
+    this.isVisible = true,
     this.hint,
     this.suffixIcon,
     this.prefixIcon,
@@ -40,39 +40,36 @@ class GeneralTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       readOnly: readOnly,
-      minLines: multiLine ? 5 : null,
+      minLines: multiLine ? 1 : null,
+
       maxLines: multiLine ? 5 : 1, // Set maxLines to 4 if multiline is enabled
-      keyboardType: multiLine ? TextInputType.multiline : null,
+      keyboardType: onlyInteger ? TextInputType.number : null,
       textAlign: isArabic ? TextAlign.end : TextAlign.start,
       obscureText: !isVisible,
-      inputFormatters:<TextInputFormatter>[
+      inputFormatters: <TextInputFormatter>[
         if (onlyInteger)
           FilteringTextInputFormatter.allow(
-            RegExp(r'^[\u0660-\u0669\u0030-\u0039]*\.?[\u0660-\u0669\u0030-\u0039]*$'),
+            RegExp(
+                r'^[\u0660-\u0669\u0030-\u0039]*\.?[\u0660-\u0669\u0030-\u0039]*$'),
           ),
       ],
-
       decoration: InputDecoration(
-        // fillColor: ColorManager.kWhiteColor,
-        filled: true,
         hintText: hint,
-
-
         suffixIcon: suffixIcon != null
             ? InkWell(
-          onTap: () {
-            suffixIconFunction!();
-          },
-          child: suffixIcon,
-        )
+                onTap: () {
+                  suffixIconFunction!();
+                },
+                child: suffixIcon,
+              )
             : null,
         prefixIcon: prefixIcon != null
             ? InkWell(
-          onTap: () {
-            prefixIconFunction!();
-          },
-          child: prefixIcon,
-        )
+                onTap: () {
+                  prefixIconFunction!();
+                },
+                child: prefixIcon,
+              )
             : null,
       ),
     );
