@@ -23,6 +23,7 @@ class PersonalInformationListBlock extends StatelessWidget {
         itemBuilder: (context, index) => PersonalInformationContainerWidget(
               title: titles[index],
               subTitle: subTitles[index],
+          canBeCopy: index==1,
             ),
         separatorBuilder: (context, index) => SizedBox(
               height: AppVerticalSize.s8,

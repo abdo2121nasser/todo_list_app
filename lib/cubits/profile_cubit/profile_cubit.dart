@@ -33,7 +33,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     String? token = await _getAccessToken();
     if (token == null) return;
     token =
-'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYxNzE4NDIsImV4cCI6MTcyNjE3MjQ0Mn0.u39A-fMgbt5muxv8VrK4ZBP2E0s1qMpqlUI3OhzZ5Zs';
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMDg0NzYsImV4cCI6MTcyNjMwOTA3Nn0.t13hkK6Iu3dudWvYe3kSXcmr3ejlu_j3HVIwtIlZde8';
+
     try {
       var response = await DioHelper.getData(
           url: StringManager.logic.kProfileEndPoint, token: token);
