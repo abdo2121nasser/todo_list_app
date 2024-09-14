@@ -6,6 +6,7 @@ import 'package:todo_list_app/recourses/blocks/home_screen_block/todo_item_block
 import 'package:todo_list_app/recourses/blocks/home_screen_block/todo_list_block.dart';
 import 'package:todo_list_app/recourses/blocks/home_screen_block/widgets/category_widget.dart';
 import 'package:todo_list_app/recourses/blocks/home_screen_block/widgets/title_widget.dart';
+import 'package:todo_list_app/recourses/manager_files/color_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/values_manager.dart';
 import 'category_list_block.dart';
 
@@ -33,10 +34,24 @@ class HomeScreenBodyBlock extends StatelessWidget {
           },
         ),
         BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {
-          },
+          listener: (context, state) {},
           builder: (context, state) {
-            return TodoListBlock(items: homCubit.todoListModels,);
+            return Expanded(
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await homCubit.getTodoList();
+                },
+                color: kIndigoColor,
+                child: TodoListBlock(
+                  items: homCubit.todoListModels,
+                  getMoreItemsFunction: () {
+                    homCubit.getMoreTodoListItems();
+                  },
+                  state: state,
+                  isFullList: homCubit.isFullTodoList,
+                ),
+              ),
+            );
           },
         )
       ],

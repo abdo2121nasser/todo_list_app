@@ -17,12 +17,14 @@ class HomeCubit extends Cubit<HomeState> {
   List<ItemModel> todoListModels = [];
   int currentCategory = 0;
   int currentPage = 1;
+  bool isFullTodoList=false;
   final List<String> categories = [
     StringManager.ui.kAllWord,
     StringManager.ui.kInProgressWord,
     StringManager.ui.kWaitingWord,
     StringManager.ui.kFinishedWord,
   ];
+
   changeCurrentCategory({required int index}) {
     currentCategory = index;
     emit(ChangeCurrentCategory());
@@ -40,6 +42,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   getTodoList() async {
     todoListModels.clear();
+    isFullTodoList=false;
+    currentPage = 1; // Reset page for new category or full reload
     emit(GetTodoListLoadingState());
     try {
       Response response = await DioHelper.getData(
@@ -47,13 +51,11 @@ class HomeCubit extends Cubit<HomeState> {
               StringManager.logic.kPageQuery +
               currentPage.toString(),
           token: _getAccessToken());
+
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        print(response.data.toString());
         todoListModels = (response.data as List)
             .map((task) => ItemModel.fromJson(task))
             .toList();
-
-        print(todoListModels.length);
         emit(GetTodoListSuccessState());
       } else {
         emit(GetTodoListErrorState());
@@ -61,6 +63,38 @@ class HomeCubit extends Cubit<HomeState> {
       }
     } catch (error) {
       emit(GetTodoListErrorState());
+      debugPrint(error.toString());
+    }
+  }
+
+  getMoreTodoListItems() async {
+    if(isFullTodoList) return;
+    incrementCurrentPage();
+    emit(GetMoreTodoListItemsLoadingState());
+
+    try {
+      Response response = await DioHelper.getData(
+          url: StringManager.logic.kTodoEndPoint +
+              StringManager.logic.kPageQuery +
+              currentPage.toString(),
+          token: _getAccessToken());
+
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        List<ItemModel> temp = (response.data as List)
+            .map((task) => ItemModel.fromJson(task))
+            .toList();
+        if(temp.isEmpty)
+          {
+            isFullTodoList=true;
+          }
+        todoListModels.addAll(temp);
+        emit(GetMoreTodoListItemsSuccessState());
+      } else {
+        emit(GetMoreTodoListItemsErrorState());
+        debugPrint(response.statusMessage.toString());
+      }
+    } catch (error) {
+      emit(GetMoreTodoListItemsErrorState());
       debugPrint(error.toString());
     }
   }
