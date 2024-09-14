@@ -47,6 +47,8 @@ class LogicStrings{
    String kRegisterEndPoint = '/auth/register';
    String kLoginEndPoint = '/auth/login';
    String kProfileEndPoint = '/auth/profile';
+   String kRefreshTokenEndPoint = '/auth/refresh-token?';
+   String kRefreshTokenQuery = 'token=';
 
    String kPhoneNumber = 'phone';
    String kPassword = 'password';
@@ -54,6 +56,13 @@ class LogicStrings{
    String kExperience = 'experienceYears';
    String kAddress = 'address';
    String kLevel = 'level';
+
+
+   String kTokenBox = 'token box';
+
+   String kProfileBox = 'profile box';
+   String kMyProfileModel = 'my profile model';
+
 
    String kUserId = '_id';
    String kAccessToken = 'access_token';

@@ -7,6 +7,7 @@ import 'package:todo_list_app/cubits/profile_cubit/profile_cubit.dart';
 import 'package:todo_list_app/screens/app_bar_screens/profile_screen.dart';
 import 'package:todo_list_app/screens/authentication_screens/login_screen.dart';
 import 'package:todo_list_app/screens/home_screen/home_screen.dart';
+import 'package:todo_list_app/screens/splash_screen.dart';
 
 import '../recourses/manager_files/theme_manager.dart';
 
@@ -28,9 +29,10 @@ class TodoListApp extends StatelessWidget {
                   GetMaterialApp(
                     debugShowCheckedModeBanner: false,
                     theme: getAppTheme(),
-                    // home: LoginScreen(),
+                    home: const SplashScreen(),
+                //   home: LoginScreen(),
                     //  home: RegisterScreen(),
-                     home: HomeScreen(),
+                 //   home: HomeScreen(),
                  //   home: ProfileScreen(),
                   )),
     );

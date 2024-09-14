@@ -1,6 +1,32 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
+part 'profile_model.g.dart';
+@HiveType(typeId: 1)
 class ProfileModel {
+  @HiveField(0)
+  DateTime createdAt;
+  @HiveField(1)
+  String address;
+  @HiveField(2)
+  String level;
+  @HiveField(3)
+  String displayName;
+  @HiveField(4)
+  List<String> roles;
+  @HiveField(5)
+  int v;
+  @HiveField(6)
+  bool active;
+  @HiveField(7)
+  String id;
+  @HiveField(8)
+  int experienceYears;
+  @HiveField(9)
+  String username;
+  @HiveField(10)
+  DateTime updatedAt;
+  @HiveField(11)
   ProfileModel({
     required this.createdAt,
     required this.address,
@@ -14,18 +40,6 @@ class ProfileModel {
     required this.username,
     required this.updatedAt,
   });
-
-  DateTime createdAt;
-  String address;
-  String level;
-  String displayName;
-  List<String> roles;
-  int v;
-  bool active;
-  String id;
-  int experienceYears;
-  String username;
-  DateTime updatedAt;
 
   factory ProfileModel.fromJson(Map<dynamic, dynamic> json) => ProfileModel(
         createdAt: DateTime.parse(json["createdAt"]),

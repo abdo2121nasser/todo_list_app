@@ -1,13 +1,14 @@
-import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:intl_phone_field/phone_number.dart';
-import 'package:meta/meta.dart';
 import 'package:todo_list_app/recourses/manager_files/string_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/toast_massage_manager.dart';
 import 'package:todo_list_app/recourses/services/dio_service.dart';
+import 'package:todo_list_app/screens/home_screen/home_screen.dart';
 
 part 'login_state.dart';
 
@@ -74,8 +75,9 @@ class LoginCubit extends Cubit<LoginState> {
           url: StringManager.logic.kLoginEndPoint, data: _loginData);
       if (response.statusCode! >= 200 && response.statusCode! <300) {
         emit(LoginSuccessState(response: response));
+        Get.to(()=>const HomeScreen());
       }
-    } on DioException catch (e) {
+    } on dio.DioException catch (e) {
       if (e.response?.statusCode == 401) {
         await _refreshToken();
       }
