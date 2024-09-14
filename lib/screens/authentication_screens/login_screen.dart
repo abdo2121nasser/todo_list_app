@@ -20,20 +20,33 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(),
-      child: Scaffold(
-          body: Column(
+      child: BlocConsumer<LoginCubit, LoginState>(
+        listener: (context, state) {
+        },
+        builder: (context, state) {
+          return Scaffold(
+              body: Column(
 
-            children: [
-              const Expanded(child: WelcomeImageBlock()),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppHorizontalSize.s14),
-                  child: const LoginLowerBlock(),
-                ),
-              )
-            ],
-          )),
+                children: [
+                  const Expanded(
+                      flex: 3,
+                      child: WelcomeImageBlock()),
+           state is LoginLoadingState?
+                  const Expanded(
+                      flex: 1,
+                      child: Center(child: CircularProgressIndicator(color: kIndigoColor,),)):
+                  Expanded(
+                    flex: 3,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: AppHorizontalSize.s14),
+                      child: const LoginLowerBlock(),
+                    ),
+                  )
+                ],
+              ));
+        },
+      ),
     );
   }
 }

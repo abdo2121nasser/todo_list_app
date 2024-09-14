@@ -29,8 +29,8 @@ class TodoListApp extends StatelessWidget {
                   GetMaterialApp(
                     debugShowCheckedModeBanner: false,
                     theme: getAppTheme(),
-                    home: const SplashScreen(),
-                //   home: LoginScreen(),
+                  home: const SplashScreen(),
+               //   home: LoginScreen(),
                     //  home: RegisterScreen(),
                  //   home: HomeScreen(),
                  //   home: ProfileScreen(),

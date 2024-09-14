@@ -55,6 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } catch (error) {
       debugPrint(error.toString());
+      Get.to(LoginScreen());
     }
   }
 }

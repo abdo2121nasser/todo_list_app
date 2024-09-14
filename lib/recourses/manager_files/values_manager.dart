@@ -72,6 +72,7 @@ class AppRadiusSize
 {
   static double s2=2.0.r;
   static double s4=4.0.r;
+  static double s6=6.0.r;
   static double s8=8.0.r;
   static double s10=10.0.r;
   static double s12=12.0.r;

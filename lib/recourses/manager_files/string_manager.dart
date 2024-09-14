@@ -40,6 +40,9 @@ class UiStrings{
    String kLocation = 'Location';
 
 
+   String kMyTasksWord = 'My Tasks';
+
+
 
 }
 class LogicStrings{
@@ -47,6 +50,8 @@ class LogicStrings{
    String kRegisterEndPoint = '/auth/register';
    String kLoginEndPoint = '/auth/login';
    String kProfileEndPoint = '/auth/profile';
+   String kLogOutEndPoint = '/auth/logout';
+
    String kRefreshTokenEndPoint = '/auth/refresh-token?';
    String kRefreshTokenQuery = 'token=';
 
