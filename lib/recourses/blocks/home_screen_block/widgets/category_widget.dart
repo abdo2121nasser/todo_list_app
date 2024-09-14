@@ -5,21 +5,25 @@ import 'package:todo_list_app/recourses/manager_files/style_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/values_manager.dart';
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({super.key});
+  final String title;
+  final bool isSelected;
+  const CategoryWidget({super.key,required this.title,
+  required this.isSelected
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: AppHorizontalSize.s10, vertical: AppVerticalSize.s5),
+          horizontal: AppHorizontalSize.s14, vertical: AppVerticalSize.s5),
       decoration: BoxDecoration(
-        color: kIndigoColor,
+        color: isSelected? kIndigoColor: kLightIndigoColor,
         borderRadius: BorderRadius.circular(AppRadiusSize.s20),
       ),
       alignment: Alignment.center,
       child: Text(
-        'Inpogress',
-        style: getBoldStyle(fontSize: FontSize.s16, color: kWhiteColor),
+        title,
+        style: getBoldStyle(fontSize: FontSize.s16, color:isSelected? kWhiteColor:kLightBlackColor),
       ),
     );
   }

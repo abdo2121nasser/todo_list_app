@@ -41,8 +41,10 @@ class UiStrings{
 
 
    String kMyTasksWord = 'My Tasks';
-
-
+   String kAllWord = 'All';
+   String kInProgressWord = 'InProgress';
+   String kWaitingWord = 'Waiting';
+   String kFinishedWord = 'Finished';
 
 }
 class LogicStrings{
@@ -72,6 +74,14 @@ class LogicStrings{
    String kUserId = '_id';
    String kAccessToken = 'access_token';
    String kRefreshToken = 'refresh_token';
+
+
+
+
+
+
+
+
 
 
 }

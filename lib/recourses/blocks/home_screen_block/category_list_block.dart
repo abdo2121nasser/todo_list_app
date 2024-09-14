@@ -3,7 +3,11 @@ import 'package:todo_list_app/recourses/blocks/home_screen_block/widgets/categor
 import 'package:todo_list_app/recourses/manager_files/values_manager.dart';
 
 class CategoryListBlock extends StatelessWidget {
-  const CategoryListBlock({super.key});
+  final List<String> titles;
+  final int selectedIndex;
+ final Function(int) changeCategoryFunction;
+  const CategoryListBlock({super.key,required this.titles,required this.selectedIndex,required
+  this.changeCategoryFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,14 @@ class CategoryListBlock extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: AppVerticalSize.s10),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) =>
-            const CategoryWidget(), // Use CategoryWidget here
+             InkWell(
+               onTap: (){
+                 changeCategoryFunction(index);
+               },
+               child: CategoryWidget(title: titles[index],
+               isSelected: selectedIndex==index,
+               ),
+             ), // Use CategoryWidget here
         separatorBuilder: (context, index) =>
             SizedBox(width: AppHorizontalSize.s5),
         itemCount: 4, // Adjust the itemCount if needed

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:todo_list_app/cubits/home_cubit/home_cubit.dart';
 import 'package:todo_list_app/recourses/blocks/general_blocks/general_app_bar_block.dart';
 import 'package:todo_list_app/recourses/manager_files/color_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/image_manager.dart';
@@ -20,67 +22,60 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: GeneralAppBarBlock(
-        title: StringManager.ui.kLogo,
-        haveReturnArrow: false,
-        actions: [
-          InkWell(
-              borderRadius: BorderRadius.circular(AppRadiusSize.s36),
-              onTap: () {
-                Get.to(() => const ProfileScreen());
+    return BlocProvider(
+      create: (context) => HomeCubit(),
+      child: Scaffold(
+        appBar: GeneralAppBarBlock(
+          title: StringManager.ui.kLogo,
+          haveReturnArrow: false,
+          actions: [
+            InkWell(
+                borderRadius: BorderRadius.circular(AppRadiusSize.s36),
+                onTap: () {
+                  Get.to(() => const ProfileScreen());
+                },
+                child: Image.asset(ImageManager.kPersonImage)),
+            IconButton(
+              onPressed: () {
+                // _logOut();
               },
-              child: Image.asset(ImageManager.kPersonImage)),
-          IconButton(
-            onPressed: () {
-              // _logOut();
-            },
-            icon: const Icon(Icons.logout_outlined,color: kIndigoColor,),
-            color: kBlackColor,
-          )
-        ],
+              icon: const Icon(Icons.logout_outlined, color: kIndigoColor,),
+              color: kBlackColor,
+            )
+          ],
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppHorizontalSize.s22),
+          child: HomeScreenBodyBlock(),
+        ),
+
+
       ),
-      body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: AppHorizontalSize.s22),
-        child: HomeScreenBodyBlock(),
-      ),
-
-
-
-
-
     );
   }
 
 
-
-
-
-
-
-
-
-  // _logOut() async {
-  //   final profileBox = Hive.box(StringManager.logic.kProfileBox);
-  //   final tokenBox = Hive.box(StringManager.logic.kTokenBox);
-  //   String refreshToken = tokenBox.get(StringManager.logic.kRefreshToken);
-  //   String accessToken = tokenBox.get(StringManager.logic.kAccessToken);
-  //   try {
-  //     dio.Response response = await DioHelper.postData(
-  //         url: StringManager.logic.kLogOutEndPoint,
-  //         data: {
-  //           // "token":
-  //           //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTc2MDd9.0cuVZ9-NCAXXzsW4igtu6cTklZxCyvAuP1lRlZKFtd"
-  //         },
-  //         token:
-  //             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTgxMzUsImV4cCI6MTcyNjMxODczNX0.tGqwpFIGhk20k7RciqOCMmSHiN18M91kTuoMQ4ebaWM");
-  //     if (response.statusCode! >= 200 && response.statusCode! < 300) {
-  //       profileBox.clear();
-  //       tokenBox.clear();
-  //       Get.offAll(() => const LoginScreen());
-  //     }
-  //   } catch (error) {
-  //     debugPrint(error.toString());
-  //   }
-  // }
+// _logOut() async {
+//   final profileBox = Hive.box(StringManager.logic.kProfileBox);
+//   final tokenBox = Hive.box(StringManager.logic.kTokenBox);
+//   String refreshToken = tokenBox.get(StringManager.logic.kRefreshToken);
+//   String accessToken = tokenBox.get(StringManager.logic.kAccessToken);
+//   try {
+//     dio.Response response = await DioHelper.postData(
+//         url: StringManager.logic.kLogOutEndPoint,
+//         data: {
+//           // "token":
+//           //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTc2MDd9.0cuVZ9-NCAXXzsW4igtu6cTklZxCyvAuP1lRlZKFtd"
+//         },
+//         token:
+//             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTgxMzUsImV4cCI6MTcyNjMxODczNX0.tGqwpFIGhk20k7RciqOCMmSHiN18M91kTuoMQ4ebaWM");
+//     if (response.statusCode! >= 200 && response.statusCode! < 300) {
+//       profileBox.clear();
+//       tokenBox.clear();
+//       Get.offAll(() => const LoginScreen());
+//     }
+//   } catch (error) {
+//     debugPrint(error.toString());
+//   }
+// }
 }
