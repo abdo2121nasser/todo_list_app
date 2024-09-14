@@ -23,59 +23,53 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => HomeCubit()..getTodoList(),
       child: Scaffold(
-        appBar: GeneralAppBarBlock(
-          title: StringManager.ui.kLogo,
-          haveReturnArrow: false,
-          actions: [
-            InkWell(
-                borderRadius: BorderRadius.circular(AppRadiusSize.s36),
-                onTap: () {
-                  Get.to(() => const ProfileScreen());
-                },
-                child: Image.asset(ImageManager.kPersonImage)),
-            IconButton(
-              onPressed: () {
-                // _logOut();
-              },
-              icon: const Icon(Icons.logout_outlined, color: kIndigoColor,),
-              color: kBlackColor,
-            )
-          ],
-        ),
+        appBar: _appBar,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppHorizontalSize.s22),
           child: HomeScreenBodyBlock(),
         ),
-
-
       ),
     );
   }
 
 
-// _logOut() async {
-//   final profileBox = Hive.box(StringManager.logic.kProfileBox);
-//   final tokenBox = Hive.box(StringManager.logic.kTokenBox);
-//   String refreshToken = tokenBox.get(StringManager.logic.kRefreshToken);
-//   String accessToken = tokenBox.get(StringManager.logic.kAccessToken);
-//   try {
-//     dio.Response response = await DioHelper.postData(
-//         url: StringManager.logic.kLogOutEndPoint,
-//         data: {
-//           // "token":
-//           //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTc2MDd9.0cuVZ9-NCAXXzsW4igtu6cTklZxCyvAuP1lRlZKFtd"
-//         },
-//         token:
-//             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQ5ZmIyZWVmMGJmOTNkZDAwNzExYmEiLCJpYXQiOjE3MjYzMTgxMzUsImV4cCI6MTcyNjMxODczNX0.tGqwpFIGhk20k7RciqOCMmSHiN18M91kTuoMQ4ebaWM");
-//     if (response.statusCode! >= 200 && response.statusCode! < 300) {
-//       profileBox.clear();
-//       tokenBox.clear();
-//       Get.offAll(() => const LoginScreen());
-//     }
-//   } catch (error) {
-//     debugPrint(error.toString());
-//   }
-// }
+
+
+
+  GeneralAppBarBlock get _appBar {
+    return GeneralAppBarBlock(
+        title: StringManager.ui.kLogo,
+        haveReturnArrow: false,
+        actions: [
+          InkWell(
+              borderRadius: BorderRadius.circular(AppRadiusSize.s36),
+              onTap: () {
+                Get.to(() => const ProfileScreen());
+              },
+              child: Image.asset(ImageManager.kPersonImage)),
+          IconButton(
+            onPressed: () {
+              _logOut();
+            },
+            icon: const Icon(
+              Icons.logout_outlined,
+              color: kIndigoColor,
+            ),
+            color: kBlackColor,
+          )
+        ],
+      );
+  }
+
+  _logOut() async {
+    final profileBox = Hive.box(StringManager.logic.kProfileBox);
+    final tokenBox = Hive.box(StringManager.logic.kTokenBox);
+    String refreshToken = tokenBox.get(StringManager.logic.kRefreshToken);
+    String accessToken = tokenBox.get(StringManager.logic.kAccessToken);
+    profileBox.clear();
+    tokenBox.clear();
+    Get.offAll(() => const LoginScreen());
+  }
 }

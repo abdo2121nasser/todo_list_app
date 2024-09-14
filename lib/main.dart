@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todo_list_app/recourses/manager_files/string_manager.dart';
-import 'package:todo_list_app/recourses/models/profile_model.dart';
+import 'package:todo_list_app/recourses/models/profile_model/profile_model.dart';
 import 'package:todo_list_app/recourses/services/bloc_observer/bloc_observer.dart';
 import 'package:todo_list_app/recourses/services/dio_service.dart';
 

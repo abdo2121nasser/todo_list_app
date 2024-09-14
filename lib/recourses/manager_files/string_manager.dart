@@ -45,6 +45,9 @@ class UiStrings{
    String kInProgressWord = 'InProgress';
    String kWaitingWord = 'Waiting';
    String kFinishedWord = 'Finished';
+   String kHighWord = 'high';
+   String kMediumWord = 'medium';
+   String kLowWord = 'low';
 
 }
 class LogicStrings{
@@ -53,9 +56,11 @@ class LogicStrings{
    String kLoginEndPoint = '/auth/login';
    String kProfileEndPoint = '/auth/profile';
    String kLogOutEndPoint = '/auth/logout';
+   String kTodoEndPoint = '/todos?';
 
    String kRefreshTokenEndPoint = '/auth/refresh-token?';
    String kRefreshTokenQuery = 'token=';
+   String kPageQuery = 'page=';
 
    String kPhoneNumber = 'phone';
    String kPassword = 'password';

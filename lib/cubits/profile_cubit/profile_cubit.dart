@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_list_app/recourses/manager_files/string_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/toast_massage_manager.dart';
-import 'package:todo_list_app/recourses/models/profile_model.dart';
+import 'package:todo_list_app/recourses/models/profile_model/profile_model.dart';
 import 'package:todo_list_app/recourses/services/dio_service.dart';
 
 part 'profile_state.dart';
