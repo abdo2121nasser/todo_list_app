@@ -15,9 +15,12 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context) => BlocProvider.of(context);
 
   List<ItemModel> todoListModels = [];
+  List<ItemModel> todoListInProgressModels = [];
+  List<ItemModel> todoListWaitingModels = [];
+  List<ItemModel> todoListFinishedModels = [];
   int currentCategory = 0;
   int currentPage = 1;
-  bool isFullTodoList=false;
+  bool isFullTodoList = false;
   final List<String> categories = [
     StringManager.ui.kAllWord,
     StringManager.ui.kInProgressWord,
@@ -40,10 +43,37 @@ class HomeCubit extends Cubit<HomeState> {
     return tokenBox.get(StringManager.logic.kAccessToken);
   }
 
+  filterModels({required ItemModel item}) {
+    switch (item.status) {
+      case 'inProgress':
+        todoListInProgressModels.add(item);
+        return;
+      case 'waiting':
+        todoListWaitingModels.add(item);
+        return;
+      case 'Finished':
+        todoListFinishedModels.add(item);
+        return;
+    }
+  }
+    getTodoModel(){
+    switch(currentCategory)
+        {
+      case 0:
+        return todoListModels;
+      case 1:
+        return todoListInProgressModels;
+      case 2 :
+        return todoListWaitingModels;
+      case 3:
+        return todoListFinishedModels;
+    }
+  }
+
   getTodoList() async {
     todoListModels.clear();
-    isFullTodoList=false;
-    currentPage = 1; // Reset page for new category or full reload
+    isFullTodoList = false;
+    currentPage = 1;
     emit(GetTodoListLoadingState());
     try {
       Response response = await DioHelper.getData(
@@ -53,9 +83,11 @@ class HomeCubit extends Cubit<HomeState> {
           token: _getAccessToken());
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        todoListModels = (response.data as List)
-            .map((task) => ItemModel.fromJson(task))
-            .toList();
+        todoListModels = (response.data as List).map((task) {
+          var temp = ItemModel.fromJson(task);
+          filterModels(item: temp);
+          return temp;
+        }).toList();
         emit(GetTodoListSuccessState());
       } else {
         emit(GetTodoListErrorState());
@@ -68,7 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   getMoreTodoListItems() async {
-    if(isFullTodoList) return;
+    if (isFullTodoList) return;
     incrementCurrentPage();
     emit(GetMoreTodoListItemsLoadingState());
 
@@ -81,12 +113,15 @@ class HomeCubit extends Cubit<HomeState> {
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         List<ItemModel> temp = (response.data as List)
-            .map((task) => ItemModel.fromJson(task))
+            .map((task) {
+              var item=ItemModel.fromJson(task);
+              filterModels(item: item);
+              return item;
+            })
             .toList();
-        if(temp.isEmpty)
-          {
-            isFullTodoList=true;
-          }
+        if (temp.isEmpty) {
+          isFullTodoList = true;
+        }
         todoListModels.addAll(temp);
         emit(GetMoreTodoListItemsSuccessState());
       } else {

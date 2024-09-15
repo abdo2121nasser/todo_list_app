@@ -43,7 +43,7 @@ class HomeScreenBodyBlock extends StatelessWidget {
                 },
                 color: kIndigoColor,
                 child: TodoListBlock(
-                  items: homCubit.todoListModels,
+                  items: homCubit.getTodoModel(),
                   getMoreItemsFunction: () {
                     homCubit.getMoreTodoListItems();
                   },
