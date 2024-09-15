@@ -40,9 +40,13 @@ class GeneralTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       readOnly: readOnly,
-      minLines: multiLine ? 1 : null,
+      textAlignVertical: TextAlignVertical.top,
 
-      maxLines: multiLine ? 5 : 1, // Set maxLines to 4 if multiline is enabled
+      // minLines: multiLine ? 1 : null,
+      // maxLines: multiLine ? 5 : 1,
+      minLines:  null,
+      maxLines:null,
+      expands: multiLine,
       keyboardType: onlyInteger ? TextInputType.number : null,
       textAlign: isArabic ? TextAlign.end : TextAlign.start,
       obscureText: !isVisible,
@@ -55,6 +59,7 @@ class GeneralTextFormField extends StatelessWidget {
       ],
       decoration: InputDecoration(
         hintText: hint,
+        contentPadding: EdgeInsets.only(top: AppVerticalSize.s18,left: AppHorizontalSize.s18),
         suffixIcon: suffixIcon != null
             ? InkWell(
                 onTap: () {

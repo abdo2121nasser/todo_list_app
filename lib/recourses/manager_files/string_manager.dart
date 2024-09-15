@@ -49,6 +49,20 @@ class UiStrings{
    String kMediumWord = 'medium';
    String kLowWord = 'low';
 
+
+   String kAddNewTaskWord = 'Add new task';
+   String kAddNewImageWord = 'Add Img';
+   String kPriorityWord = 'Priority';
+   String kTaskTitleWord = 'Task Title';
+   String kTaskHintWord = 'Enter title here...';
+   String kDescriptionTitleWord = 'Task Description';
+   String kDescriptionHintWord = 'Enter description here...';
+   String kDateTitleWord = 'Due date';
+   String kDateHintWord = 'choose due date...';
+   String kAddTaskWord = 'Add task';
+
+
+
 }
 class LogicStrings{
 
@@ -57,6 +71,7 @@ class LogicStrings{
    String kProfileEndPoint = '/auth/profile';
    String kLogOutEndPoint = '/auth/logout';
    String kTodoEndPoint = '/todos?';
+   String kCreateEndPoint = '/todos';
 
    String kRefreshTokenEndPoint = '/auth/refresh-token?';
    String kRefreshTokenQuery = 'token=';
@@ -69,6 +84,11 @@ class LogicStrings{
    String kAddress = 'address';
    String kLevel = 'level';
 
+   String kDueDate="dueDate";
+   String kPriority='priority';
+   String kDescription="desc";
+   String kTitle= "title";
+   String kImage=  "image";
 
    String kTokenBox = 'token box';
 

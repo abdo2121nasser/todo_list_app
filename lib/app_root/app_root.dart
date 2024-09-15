@@ -10,6 +10,7 @@ import 'package:todo_list_app/screens/home_screen/home_screen.dart';
 import 'package:todo_list_app/screens/splash_screen.dart';
 
 import '../recourses/manager_files/theme_manager.dart';
+import '../screens/home_screen/change_todo_item_properties_screen.dart';
 
 class TodoListApp extends StatelessWidget {
   const TodoListApp.internalConstructor({super.key});
@@ -29,8 +30,9 @@ class TodoListApp extends StatelessWidget {
                   GetMaterialApp(
                     debugShowCheckedModeBanner: false,
                     theme: getAppTheme(),
-                  home: const SplashScreen(),
+                 home: const SplashScreen(),
                //   home: LoginScreen(),
+               //      home: CreateTodoItemPropertiesScreen(),
                     //  home: RegisterScreen(),
                  //   home: HomeScreen(),
                  //   home: ProfileScreen(),
