@@ -20,7 +20,7 @@ class TodoItemBlock extends StatelessWidget {
         SizedBox(
             width: MediaQuery.of(context).size.width * 0.57,
             child: TodoItemContentBlock( item: item,)),
-        InkWell(onTap: () {}, child: Icon(Icons.more_vert))
+        InkWell(onTap: () {}, child: const Icon(Icons.more_vert))
       ],
     );
   }

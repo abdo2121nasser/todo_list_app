@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
           InkWell(
               borderRadius: BorderRadius.circular(AppRadiusSize.s36),
               onTap: () {
-                Get.to(() => const ProfileScreen());
+               Get.to(() => const ProfileScreen());
               },
               child: Image.asset(ImageManager.kPersonImage)),
           IconButton(

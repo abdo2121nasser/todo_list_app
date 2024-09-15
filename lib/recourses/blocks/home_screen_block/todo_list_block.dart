@@ -39,12 +39,12 @@ class TodoListBlock extends StatelessWidget {
           if (index == items.length) {
             // Show loading indicator at the end of the list if in loading state
             return state is GetMoreTodoListItemsLoadingState
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(
                       color: kIndigoColor,
                     ),
                   )
-                : SizedBox.shrink(); // Return an empty widget when not loading
+                : const SizedBox.shrink(); // Return an empty widget when not loading
           }
 
           return SizedBox(
