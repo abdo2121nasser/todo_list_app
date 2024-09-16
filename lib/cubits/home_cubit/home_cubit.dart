@@ -56,14 +56,14 @@ class HomeCubit extends Cubit<HomeState> {
         return;
     }
   }
-    getTodoModel(){
-    switch(currentCategory)
-        {
+
+  getTodoModel() {
+    switch (currentCategory) {
       case 0:
         return todoListModels;
       case 1:
         return todoListInProgressModels;
-      case 2 :
+      case 2:
         return todoListWaitingModels;
       case 3:
         return todoListFinishedModels;
@@ -88,6 +88,7 @@ class HomeCubit extends Cubit<HomeState> {
           filterModels(item: temp);
           return temp;
         }).toList();
+        sort();
         emit(GetTodoListSuccessState());
       } else {
         emit(GetTodoListErrorState());
@@ -112,17 +113,16 @@ class HomeCubit extends Cubit<HomeState> {
           token: _getAccessToken());
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        List<ItemModel> temp = (response.data as List)
-            .map((task) {
-              var item=ItemModel.fromJson(task);
-              filterModels(item: item);
-              return item;
-            })
-            .toList();
+        List<ItemModel> temp = (response.data as List).map((task) {
+          var item = ItemModel.fromJson(task);
+          filterModels(item: item);
+          return item;
+        }).toList();
         if (temp.isEmpty) {
           isFullTodoList = true;
         }
         todoListModels.addAll(temp);
+        sort();
         emit(GetMoreTodoListItemsSuccessState());
       } else {
         emit(GetMoreTodoListItemsErrorState());
@@ -132,5 +132,24 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetMoreTodoListItemsErrorState());
       debugPrint(error.toString());
     }
+  }
+
+  sortItems({required List<ItemModel> items}) {
+    const priorityOrder = {'high': 1, 'medium': 2, 'low': 3};
+    items.sort((a, b) {
+      int priorityA = priorityOrder[a.priority.toLowerCase()] ??
+          4; // Default to 4 for unknown priority
+      int priorityB = priorityOrder[b.priority.toLowerCase()] ?? 4;
+
+      return priorityA.compareTo(priorityB);
+    });
+    return items;
+  }
+
+  sort() {
+    todoListModels = sortItems(items: todoListModels);
+    todoListInProgressModels = sortItems(items: todoListInProgressModels);
+    todoListWaitingModels = sortItems(items: todoListWaitingModels);
+    todoListFinishedModels = sortItems(items: todoListFinishedModels);
   }
 }
