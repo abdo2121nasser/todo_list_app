@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_list_app/cubits/home_cubit/home_cubit.dart';
 import 'package:todo_list_app/recourses/blocks/home_screen_block/todo_item_block.dart';
 import 'package:todo_list_app/recourses/manager_files/color_manager.dart';
 import 'package:todo_list_app/recourses/manager_files/values_manager.dart';
 
+import '../../../screens/home_screen/task_details_screen.dart';
 import '../../models/item_model.dart';
 
 class TodoListBlock extends StatelessWidget {
@@ -37,19 +39,23 @@ class TodoListBlock extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: AppVerticalSize.s14),
         itemBuilder: (context, index) {
           if (index == items.length) {
-            // Show loading indicator at the end of the list if in loading state
             return state is GetMoreTodoListItemsLoadingState
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: kIndigoColor,
                     ),
                   )
-                : const SizedBox.shrink(); // Return an empty widget when not loading
+                : const SizedBox
+                    .shrink();
           }
-
-          return SizedBox(
-            height: AppVerticalSize.s80,
-            child: TodoItemBlock(item: items[index]),
+          return InkWell(
+            onTap: (){
+              Get.to(TaskDetailsScreen(itemModel: items[index],));
+            },
+            child: SizedBox(
+              height: AppVerticalSize.s80,
+              child: TodoItemBlock(item: items[index]),
+            ),
           );
         },
         separatorBuilder: (context, index) => SizedBox(

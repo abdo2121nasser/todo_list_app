@@ -61,6 +61,8 @@ class UiStrings{
    String kDateHintWord = 'choose due date...';
    String kAddTaskWord = 'Add task';
 
+   String kTaskDetailsWord = 'Task Details';
+
 
 
 }

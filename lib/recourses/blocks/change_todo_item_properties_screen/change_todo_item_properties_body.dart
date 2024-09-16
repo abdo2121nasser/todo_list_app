@@ -72,6 +72,8 @@ class ChangeTodoItemPropertiesBody extends StatelessWidget {
 addCubit.selectDateTime(context);
                 },
               ),
+               state is AddNewTaskLoadingState?
+              const Center(child: CircularProgressIndicator(color: kIndigoColor,)):
                CreateTaskButtonWidget(buttonFunction: (){
                 addCubit.addTaskProcess();
                },)

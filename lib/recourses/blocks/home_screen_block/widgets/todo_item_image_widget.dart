@@ -36,7 +36,7 @@ class TodoItemImageWidget extends StatelessWidget {
   Future<bool> _imageExists(String url) async {
     try {
       final response = await Dio().get(url);
-      return response.statusCode == 200; // Check if the image is valid
+      return (response.statusCode! >= 200 && response.statusCode! < 300); // Check if the image is valid
     } catch (e) {
       return false; // If any error occurs, return false
     }
